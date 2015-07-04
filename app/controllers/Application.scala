@@ -1,12 +1,42 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
+import javax.inject.Inject
 
-class Application extends Controller {
+import com.mohiva.play.silhouette.api.{ Environment, LogoutEvent, Silhouette }
+import com.mohiva.play.silhouette.impl.authenticators.CookieAuthenticator
+import forms._
+import models.User
+import play.api.i18n.MessagesApi
 
-  def index = Action {
-    NotFound
+import scala.concurrent.Future
+
+class ApplicationController @Inject() (
+  val messagesApi: MessagesApi,
+  val env: Environment[User, CookieAuthenticator])
+  extends Silhouette[User, CookieAuthenticator] {
+
+  def index = SecuredAction.async { implicit request =>
+    Future.successful(Ok(views.html.home(request.identity)))
   }
 
+  def signIn = UserAwareAction.async { implicit request =>
+    request.identity match {
+      case Some(user) => Future.successful(Redirect(routes.ApplicationController.index()))
+      case None => Future.successful(Ok(views.html.signIn(SignInForm.form)))
+    }
+  }
+
+  def signUp = UserAwareAction.async { implicit request =>
+    request.identity match {
+      case Some(user) => Future.successful(Redirect(routes.ApplicationController.index()))
+      case None => Future.successful(Ok(views.html.signUp(SignUpForm.form)))
+    }
+  }
+
+  def signOut = SecuredAction.async { implicit request =>
+    val result = Redirect(routes.ApplicationController.index())
+    env.eventBus.publish(LogoutEvent(request.identity, request, request2Messages))
+
+    env.authenticatorService.discard(request.authenticator, result)
+  }
 }
