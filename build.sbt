@@ -1,3 +1,5 @@
+import com.tuplejump.sbt.yeoman.Yeoman
+
 name := """ideen"""
 
 version := "1.0-SNAPSHOT"
@@ -13,6 +15,7 @@ libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "5.1.35",
   "net.ceedubs" %% "ficus" % "1.1.2",
   "net.codingwell" %% "scala-guice" % "4.0.0",
+  "com.adrianhurt" %% "play-bootstrap3" % "0.4.4-P24",
   cache,
   filters,
   ws,

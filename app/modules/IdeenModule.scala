@@ -20,7 +20,8 @@ import com.mohiva.play.silhouette.impl.services._
 import com.mohiva.play.silhouette.impl.util._
 import models.User
 import models.daos._
-import models.services.{ UserService, UserServiceImpl }
+import models.services.UserService
+import models.services.impl.UserServiceImpl
 import net.ceedubs.ficus.Ficus._
 import net.ceedubs.ficus.readers.ArbitraryTypeReader._
 import net.codingwell.scalaguice.ScalaModule
@@ -28,6 +29,7 @@ import play.api.Configuration
 import play.api.libs.concurrent.Execution.Implicits._
 import play.api.libs.openid.OpenIdClient
 import play.api.libs.ws.WSClient
+import models.daos.UserDaoSlick
 
 class IdeenModule extends AbstractModule with ScalaModule {
 
@@ -37,7 +39,7 @@ class IdeenModule extends AbstractModule with ScalaModule {
   def configure() {
     bind[UserService].to[UserServiceImpl]
     bind[UserDao].to[UserDaoSlick]
-    bind[DelegableAuthInfoDAO[PasswordInfo]].to[PasswordInfoDao]
+    bind[DelegableAuthInfoDAO[PasswordInfo]].to[PasswordInfoDaoSlick]
     bind[CacheLayer].to[PlayCacheLayer]
     bind[IDGenerator].toInstance(new SecureRandomIDGenerator())
     bind[PasswordHasher].toInstance(new BCryptPasswordHasher)
