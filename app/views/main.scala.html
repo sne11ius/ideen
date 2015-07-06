@@ -5,18 +5,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+  <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("/public/dist/", "images/favicon.png")">
   <title>@title</title>
-  <link rel="stylesheet" href="@routes.Assets.at("styles/main.css")">
+  <link rel="stylesheet" href="@routes.Assets.at("/public/dist/", "styles/main.css")">
 </head>
 <body>
   <ul class="nav navbar-nav">
-    <li><a href="@routes.ApplicationController.index">Home</a></li>
+    <li><a href="@routes.ApplicationController.home">Home</a></li>
     <li><a href="https://github.com/mohiva/play-silhouette-seed">GitHub</a></li>
   </ul>
   <ul class="nav navbar-nav navbar-right">
     @user.map { u =>
-      <li><a href="@routes.ApplicationController.index">@u.fullName</a></li>
+      <li><a href="@routes.ApplicationController.home">@u.fullName</a></li>
       <li><a href="@routes.ApplicationController.signOut">Sign Out</a></li>
     }.getOrElse {
     <li><a href="@routes.ApplicationController.signIn">Sign In</a></li>

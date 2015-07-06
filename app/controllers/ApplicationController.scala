@@ -15,26 +15,26 @@ class ApplicationController @Inject() (
   val env: Environment[User, CookieAuthenticator])
   extends Silhouette[User, CookieAuthenticator] {
 
-  def index = SecuredAction.async { implicit request =>
+  def home = SecuredAction.async { implicit request =>
     Future.successful(Ok(views.html.home(request.identity)))
   }
 
   def signIn = UserAwareAction.async { implicit request =>
     request.identity match {
-      case Some(user) => Future.successful(Redirect(routes.ApplicationController.index()))
+      case Some(user) => Future.successful(Redirect(routes.ApplicationController.home()))
       case None => Future.successful(Ok(views.html.signIn(SignInForm.form)))
     }
   }
 
   def signUp = UserAwareAction.async { implicit request =>
     request.identity match {
-      case Some(user) => Future.successful(Redirect(routes.ApplicationController.index()))
+      case Some(user) => Future.successful(Redirect(routes.ApplicationController.home()))
       case None => Future.successful(Ok(views.html.signUp(SignUpForm.form)))
     }
   }
 
   def signOut = SecuredAction.async { implicit request =>
-    val result = Redirect(routes.ApplicationController.index())
+    val result = Redirect(routes.ApplicationController.home())
     env.eventBus.publish(LogoutEvent(request.identity, request, request2Messages))
 
     env.authenticatorService.discard(request.authenticator, result)
