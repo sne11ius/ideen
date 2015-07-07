@@ -1,5 +1,3 @@
-import com.tuplejump.sbt.yeoman.Yeoman
-
 name := """ideen"""
 
 version := "1.0-SNAPSHOT"
@@ -9,16 +7,11 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 scalaVersion := "2.11.6"
 
 libraryDependencies ++= Seq(
-  "com.mohiva" %% "play-silhouette" % "3.0.0-RC2",
   "com.typesafe.play" %% "play-slick" % "1.0.0",
   "com.typesafe.play" %% "play-slick-evolutions" % "1.0.0",
   "mysql" % "mysql-connector-java" % "5.1.35",
-  "net.ceedubs" %% "ficus" % "1.1.2",
   "net.codingwell" %% "scala-guice" % "4.0.0",
-  "com.adrianhurt" %% "play-bootstrap3" % "0.4.4-P24",
-  cache,
-  filters,
-  ws,
+  "io.argonaut" %% "argonaut" % "6.0.4",
   specs2 % Test
 )
 

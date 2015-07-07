@@ -1,0 +1,27 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="idee-thing">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <div><span>{{foo}}</span></div>
+  </template>
+</dom-module>
+<script>
+(function() {
+  Polymer({
+    is: 'idee-thing',
+
+    properties: {
+      thing: {
+        type: Object,
+        value: {},
+        notify: true
+      }
+    }
+  });
+})();
+</script>

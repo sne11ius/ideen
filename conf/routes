@@ -2,12 +2,9 @@
 
 GET         /                                controllers.Assets.at(path="/public", file="app/index.html")
 
-GET         /home                            @controllers.ApplicationController.home
-GET         /signIn                          @controllers.ApplicationController.signIn
-GET         /signUp                          @controllers.ApplicationController.signUp
-GET         /signOut                         @controllers.ApplicationController.signOut
-POST        /authenticate/credentials        @controllers.CredentialsAuthController.authenticate
-POST        /signUp                          @controllers.SignUpController.signUp
+GET         /api/things                      @controllers.ThingController.list
+GET         /api/things/:id                  @controllers.ThingController.single(id: Long)
+POST        /api/things                      @controllers.ThingController.add
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /*file                           controllers.Assets.at(path="/public/dist/", file)

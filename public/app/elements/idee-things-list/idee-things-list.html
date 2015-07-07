@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="idee-things-list">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <template is="dom-repeat" items="{{things}}">
+      <idee-thing thing={{item}}></idee-thing>
+    </template>
+  </template>
+</dom-module>
+<script>
+(function() {
+  Polymer({
+    is: 'idee-things-list',
+
+    ready: function() {
+      console.log('list is ready');
+    },
+    
+    properties: {
+      things: {
+        type: Array,
+        value: []
+      }
+    }
+  });
+})();
+</script>
