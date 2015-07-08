@@ -38,6 +38,10 @@ class ThingDaoSlick extends ThingDao with DaoSlick {
     }
   }
 
+  override def delete(id: Long) = {
+    db.run(slickThings.filter { _.id === id }.delete)
+  }
+
   allTables.createStatements.foreach(println)
 
 }

@@ -12,6 +12,7 @@ libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "5.1.35",
   "net.codingwell" %% "scala-guice" % "4.0.0",
   "io.argonaut" %% "argonaut" % "6.0.4",
+  filters,
   specs2 % Test
 )
 

@@ -4,7 +4,9 @@ GET         /                                controllers.Assets.at(path="/public
 
 GET         /api/things                      @controllers.ThingController.list
 GET         /api/things/:id                  @controllers.ThingController.single(id: Long)
+DELETE      /api/things/:id                  @controllers.ThingController.delete(id: Long)
 POST        /api/things                      @controllers.ThingController.add
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /*file                           controllers.Assets.at(path="/public/dist/", file)
+GET         /bower_components/*file          controllers.Assets.at(path="/public/bower_components/", file)
+GET         /*file                           controllers.Assets.at(path="/public/app/", file)

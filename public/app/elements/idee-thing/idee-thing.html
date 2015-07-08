@@ -7,7 +7,17 @@
     }
   </style>
   <template>
-    <div><span>{{foo}}</span></div>
+    <iron-ajax
+      id="remover"
+      url="{{mkUrl(thing.id)}}"
+      method="DELETE"
+      on-response="handleResponse"
+    ></iron-ajax>
+    <paper-item style="width:100%;">
+        <h2>{{thing.title}}</h2><br>
+        <span>{{thing.description}}</span>
+        <paper-button on-click="remove" style="background-color: red;">Delete</paper-button>
+    </paper-item>
   </template>
 </dom-module>
 <script>
@@ -21,6 +31,15 @@
         value: {},
         notify: true
       }
+    },
+    mkUrl: function(id) {
+      return 'http://localhost:9000/api/things/' + id;
+    },
+    remove: function() {
+      this.$.remover.generateRequest();
+    },
+    handleResponse: function() {
+      document.dispatchEvent(new CustomEvent('thingChanged'));
     }
   });
 })();

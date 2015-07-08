@@ -16,17 +16,13 @@ import play.api.libs.json.Json._
 
 class ThingController @Inject() (thingService: ThingService) extends Controller {
 
-  // Using argonaut
   implicit def DecodeThing: DecodeJson[Thing] =
     DecodeJson(c => for {
-      id <- (c --\ "id").as[Option[Long]]
-      title <- (c --\ "title").as[String]
-      description <- (c --\ "description").as[String]
-    } yield Thing(
-      id,
-      title,
-      description
-    ))
+        id <- (c --\ "id").as[Option[Long]]
+        title <- (c --\ "title").as[String]
+        description <- (c --\ "description").as[String]
+      } yield Thing(id, title, description)
+    )
 
   implicit val locationWrites = new Writes[Thing] {
     def writes(thing: Thing) = Json.obj(
@@ -49,6 +45,11 @@ class ThingController @Inject() (thingService: ThingService) extends Controller 
       }
       case None => NotFound
     }
+  }
+
+  def delete(id: Long) = Action {
+    thingService.delete(id)
+    NoContent
   }
 
   def add = Action.async { implicit request =>

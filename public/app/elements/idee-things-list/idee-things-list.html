@@ -7,8 +7,16 @@
     }
   </style>
   <template>
+    <iron-ajax
+      id="loader"
+      auto
+      url="http://localhost:9000/api/things"
+      handle-as="json"
+      last-response="{{things}}"
+    ></iron-ajax>
+    <h1>Look at the things:</h1>
     <template is="dom-repeat" items="{{things}}">
-      <idee-thing thing={{item}}></idee-thing>
+      <idee-thing thing="{{item}}"></idee-thing>
     </template>
   </template>
 </dom-module>
@@ -19,6 +27,11 @@
 
     ready: function() {
       console.log('list is ready');
+      var _this = this;
+      document.addEventListener('thingChanged', function(event) {
+        console.log('catched evt thing c`ted');
+        _this.$.loader.generateRequest();
+      });
     },
     
     properties: {
@@ -26,7 +39,7 @@
         type: Array,
         value: []
       }
-    }
+    },
   });
 })();
 </script>

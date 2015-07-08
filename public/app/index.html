@@ -4,24 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <title>Ideen for the masses!</title>
-
-  <meta name="theme-color" content="#303F9F">
 
   <link rel="manifest" href="manifest.json">
 
-  <meta name="msapplication-TileColor" content="#3372DF">
-
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Polymer Starter Kit">
-  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
-
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
-  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
-
-  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
 
   <!-- build:css styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
@@ -39,8 +26,13 @@
 <body unresolved class="fullbleed layout vertical">
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
-    <idee-things-list></idee-things-list>
-
+  <paper-header-panel style="">
+    <paper-toolbar>Header</paper-toolbar>
+    <div style="width:500px; margin: auto;">
+      <idee-thing-editor></idee-thing-editor>
+      <idee-things-list></idee-things-list>
+    </div>
+  </paper-header-panel>
   </template>
 
   <!-- build:js scripts/app.js -->

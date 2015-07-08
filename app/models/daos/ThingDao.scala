@@ -10,4 +10,6 @@ trait ThingDao {
   def save(thing: Thing): Future[Long]
 
   def find(id: Long): Future[Option[Thing]]
+  
+  def delete(id: Long)
 }

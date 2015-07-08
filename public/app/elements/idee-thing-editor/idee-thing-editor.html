@@ -1,0 +1,55 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="idee-thing-editor">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <iron-ajax
+      id="thingSender"
+      url="http://localhost:9000/api/things"
+      handle-as="json"
+      method="POST"
+      content-type="application/json"
+      on-response="handleResponse"
+    ></iron-ajax>
+    <h1>Add a thing</h1>
+    <paper-input id="title" label="title" value="{{title}}"></paper-input>
+    <paper-input label="description" value="{{description}}"></paper-input>
+    <paper-button id="send-button" on-click="sendClicked" style="background-color: lightblue;">Add</paper-button>
+  </template>
+</dom-module>
+<script>
+(function() {
+  Polymer({
+    is: 'idee-thing-editor',
+
+    properties: {
+      title: {
+        type: String,
+        value: '',
+        notify: true
+      },
+      description: {
+        type: String,
+        value: '',
+        notify: true
+      }
+    },
+    sendClicked: function() {
+      this.$.thingSender.body = JSON.stringify({title:this.title, description:this.description});
+      this.$.thingSender.generateRequest();
+    },
+    handleResponse: function(request) {
+      console.log(this.title);
+      this.title = '';
+      this.$.title.value = '';
+      this.description = '';
+      console.log(this.title);
+      document.dispatchEvent(new CustomEvent('thingChanged'));
+    }
+  });
+})();
+</script>
