@@ -1,3 +1,10 @@
 # ideen
 
-Das hier kannst du benutzen, um Ideen zu speichern.
+## Frontend
+
+s. `.\public\README.md`
+
+## How to backend
+
+`.\activator.bat` ausführen
+Es wird eine entsprechende Datenbank vorrausgesetzt. S. auch `.\conf\application.conf`
